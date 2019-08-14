@@ -7,6 +7,9 @@ module.exports = {
     },
     mode: 'development',
     devtool: 'inline-source-map',
+    resolve: {
+        extensions: ['*', '.js', '.jsx']
+    },
     output: {
         path: path.resolve(__dirname, 'dist'),
         filename: '[name].bundle.js'
@@ -27,7 +30,7 @@ module.exports = {
     module: {
         rules: [
             {
-                test: /\.js$/,
+                test: /\.(js|jsx)$/,
                 use: "babel-loader",
                 exclude: /node_modules/
             },
@@ -38,6 +41,21 @@ module.exports = {
             {
                 test: /\.less$/,
                 use: ["style-loader", "css-loader", "less-loader"],
+            },      // media
+            {
+                test: /\.(mp4|webm|ogg|mp3|wav|flac|aac)(\?.*)?$/,
+                use: {
+                    loader: "url-loader"
+
+                }
+            },
+            // fonts
+            {
+                test: /\.(woff2?|eot|ttf|otf|svg)(\?.*)?$/,
+                use: {
+                    loader: "url-loader"
+
+                }
             }
         ]
     }
